@@ -11,6 +11,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const logger = require('./utils/logger/logger')(__filename);
 const api = require('./routes');
 
 class ChatManager {
@@ -66,13 +67,13 @@ class ChatManager {
             this.server.listen(this.port, this.host);
 
             this.server.on('close', () => {
-                console.log(`${this.constructor.name} is shutting down...`);
+                logger.info(`${this.constructor.name} is shutting down...`);
             });
 
             this.server.on('listening', () => {
                 const port = this.server.address().port;
                 const address = this.server.address().address;
-                console.log(`${this.constructor.name} is now listening on ${address}:${port}`);
+                logger.info(`${this.constructor.name} is now listening on ${address}:${port}`);
                 resolve();
             });
         });
