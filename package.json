@@ -4,7 +4,8 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "jshint routes/ utils/ controllers/ server.js && jscs routes/ utils/ controllers/ server.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -12,5 +13,9 @@
     "log4js": "2.5.3",
     "mongoose": "4.11.9",
     "underscore": "1.8.3"
+  },
+  "devDependencies": {
+    "jscs": "3.0.7",
+    "jshint": "2.9.5"
   }
 }
