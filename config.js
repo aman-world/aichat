@@ -5,7 +5,7 @@
 
 module.exports = {
     logging: {
-        level: process.env.CM_LOG_LEVEL || 'info',
+        level: process.env.CM_LOG_LEVEL || 'debug',
     },
     webserver: {
         host: process.env.CM_INTERNAL_IP || '0.0.0.0',
@@ -18,5 +18,8 @@ module.exports = {
         host: process.env.CM_DB_HOST || 'localhost',
         port: process.env.CM_DB_PORT || '27017',
         name: process.env.CM_DB_NAME || 'chat-manager'
+    },
+    apiai: {
+        secret: process.env.CM_API_AI_KEY || '97be9e90afa74b8b8b8b7b92ee5fba80'
     }
 };
