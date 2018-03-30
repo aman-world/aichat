@@ -10,6 +10,7 @@ const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const logger = require('./utils/logger/logger')(__filename);
 const api = require('./routes');
@@ -19,6 +20,7 @@ class ChatManager {
         options = options || {};
         this.host = options.host || config.webserver.host;
         this.port = options.port || config.webserver.port;
+        this.dbName = options.dbName || config.database.name;
     }
 
     apiRouter() {
@@ -56,32 +58,22 @@ class ChatManager {
         this.app.use(this.errorHandler());
     }
 
-    setup() {
-        this.setupWebserver();
+    setupDatabase() {
+        mongoose.Promise = global.Promise;
+        const dbUrl = `mongodb://${config.database.username}:${config.database.password}@${config.database.host}:${config.database.port}/${this.dbName}`;
+        mongoose.connect(dbUrl)
+            .catch(err => {
+                logger.fatal(`Failed to connect to ${this.dbName} database with error: ${err}`);
+                process.exit(-1);
+            });
     }
 
     run() {
-        this.setup();
-        const promise = new Promise((resolve, reject) => {
-            this.server = http.createServer(this.app);
-            this.server.listen(this.port, this.host);
-
-            this.server.on('close', () => {
-                logger.info(`${this.constructor.name} is shutting down...`);
-            });
-
-            this.server.on('listening', () => {
-                const port = this.server.address().port;
-                const address = this.server.address().address;
-                logger.info(`${this.constructor.name} is now listening on ${address}:${port}`);
-                resolve();
-            });
+        this.setupDatabase();
+        this.setupWebserver();
+        this.app.listen(this.port, this.host, () => {
+            logger.info(`${this.constructor.name} is now listening on ${this.host}:${this.port}`);
         });
-        return promise;
-    }
-
-    stop() {
-        this.server.close();
     }
 }
 
