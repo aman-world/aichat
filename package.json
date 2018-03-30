@@ -1,0 +1,22 @@
+{
+  "name": "chat-manager",
+  "version": "0.0.0",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "jshint routes/ utils/ controllers/ models/ scripts/ services/ server.js && jscs routes/ utils/ controllers/ models/ scripts/ services/ server.js",
+    "reset-db": "node scripts/reset-db.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "express": "~4.15.2",
+    "log4js": "2.5.3",
+    "mongoose": "5.0.12",
+    "underscore": "1.8.3"
+  },
+  "devDependencies": {
+    "jscs": "3.0.7",
+    "jshint": "2.9.5"
+  }
+}

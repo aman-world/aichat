@@ -1,0 +1,20 @@
+[
+    {
+        "firstName": "Aman",
+        "lastName": "Gupta",
+        "password": "$2a$10$cZWbQQvcoqV49eFGyqicLeq0zSmEmf/qRZOL3W5py/ejyWc325Po.",
+        "email": "amngpt2@gmail.com",
+        "phone": "1234567890",
+        "active": true,
+        "avatarUrl": ""
+    },
+    {
+        "firstName": "Sona",
+        "lastName": "",
+        "password": "$2a$10$cZWbQQvcoqV49eFGyqicLeq0zSmEmf/qRZOL3W5py/ejyWc325Po.",
+        "email": "amngpt2@gmail.com",
+        "phone": "",
+        "avatarUrl": "",
+        "active": true
+    }
+]

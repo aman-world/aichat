@@ -1,0 +1,12 @@
+{
+  "preset": "google",
+  "maximumLineLength": 160,
+  "requireSemicolons": true,
+  "jsDoc": false,
+  "requireCurlyBraces": false,
+  "validateIndentation": false,
+  "disallowSpacesInFunctionExpression": false,
+  "disallowSpacesInsideObjectBrackets": false,
+  "disallowSpacesInAnonymousFunctionExpression": false,
+  "validateQuoteMarks": false
+}
