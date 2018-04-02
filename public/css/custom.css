@@ -1,0 +1,31 @@
+.chat-panel-header {
+    height: 65px;
+}
+.chat-panel-footer {
+    height: 50px;
+}
+.profile-image {
+    height: 50px;
+    width: 50px;
+}
+.profile-text {
+    padding-top: 10px;
+    font-weight: bolder;
+}
+.chat-container {
+    align-content: center;
+    padding: 5px;
+}
+.message-container {
+    height: 400px;
+}
+.message-container-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+}
+.message-box {
+    width: 60%;
+}
+pre {
+    white-space: pre-wrap;
+}
