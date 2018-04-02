@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>AI Chat</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script src="js/bootstrap-3.3.7.min.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap-3.3.7.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <script>
+    $(function () {
+      function scrollToBottom() {
+        $('#message-container').animate({
+          scrollTop: $('#message-container')[0].scrollHeight
+        }, 500);
+      };
+      var socket = io.connect();
+      $('form').submit(function () {
+        let message = $('#textMessage').val();
+        socket.emit('message', message);
+        $('#messages').append($('<br/><pre class="pull-right text-primary message-box"></pre>').text(message));
+        scrollToBottom();
+        $('#textMessage').val('');
+        return false;
+      });
+      socket.on('message', function (msg) {
+        $('#messages').append($('<br/><pre class="pull-left message-box text-success"></pre>').text(msg));
+        scrollToBottom();
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="chat-container">
+        <div class="panel panel-primary">
+          <div class="panel-heading chat-panel-header">
+            <div class="col-sm-4">
+              <img src="images/Default-Profile.png" class="img-responsive img-circle pull-left profile-image">
+            </div>
+            <div class="col-sm-8">
+              <span class="pull-right profile-text">Mr. AI</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div id="message-container" class="panel panel-default panel-body message-container message-container-scroll">
+              <div id="messages" class=""></div>
+            </div>
+          </div>
+          <div class="panel-footer chat-panel-footer">
+            <form class="">
+              <div class="input-group input-group-md">
+                <input type="text" maxlength="50" class="form-control" id="textMessage" placeholder="Search" required>
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+              </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

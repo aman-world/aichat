@@ -11,6 +11,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
+const socketIo = require('socket.io');
 
 const logger = require('./utils/logger/logger')(__filename);
 const api = require('./routes');
@@ -48,11 +49,15 @@ class ChatManager {
 
     setupWebserver() {
         this.app = express();
-        this.app.use(bodyParser.urlencoded({
-            extended: false
-        }));
+        this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(bodyParser.json());
-        // this.app.use(express.static(path.join(__dirname, 'public')));
+
+        this.app.use(express.static(path.join(__dirname, 'public')));
+        // To render Html files
+        this.app.set('views', __dirname + '/views');
+        this.app.engine('html', require('ejs').renderFile);
+        this.app.get('/', (req, res) => { res.render('index.html'); });
+
         this.app.use('/api', this.apiRouter());
         this.app.use(this.notFound());
         this.app.use(this.errorHandler());
@@ -71,7 +76,11 @@ class ChatManager {
     run() {
         this.setupDatabase();
         this.setupWebserver();
-        this.app.listen(this.port, this.host, () => {
+
+        const server = http.createServer(this.app);
+        const io = socketIo(server);
+        require('./managers/chat-manager')(this.app, io);
+        server.listen(this.port, this.host, () => {
             logger.info(`${this.constructor.name} is now listening on ${this.host}:${this.port}`);
         });
     }
