@@ -9,11 +9,13 @@
     "reset-db": "node scripts/reset-db.js"
   },
   "dependencies": {
+    "apiai": "4.0.3",
     "body-parser": "~1.17.1",
     "express": "~4.15.2",
     "log4js": "2.5.3",
     "mongoose": "5.0.12",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "uuid-v4": "^0.1.0"
   },
   "devDependencies": {
     "jscs": "3.0.7",

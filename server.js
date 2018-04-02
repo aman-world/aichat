@@ -52,7 +52,7 @@ class ChatManager {
             extended: false
         }));
         this.app.use(bodyParser.json());
-        this.app.use(express.static(path.join(__dirname, 'public')));
+        // this.app.use(express.static(path.join(__dirname, 'public')));
         this.app.use('/api', this.apiRouter());
         this.app.use(this.notFound());
         this.app.use(this.errorHandler());

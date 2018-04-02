@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 const models = require('../models');
 const config = require('../config.js');
-const userStubs = require('../utils/data/users.json');
+const userStubs = require('../utils/data/db/users.json');
 
 const logger = require('../utils/logger/logger')(__filename);
 
