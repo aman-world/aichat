@@ -38,7 +38,7 @@ pre {
 
 @media screen and (max-height: 1023px) {
     .message-container {
-        height: 70vh;
-        max-height: 72vh;
+        height: 68vh;
+        max-height: 68vh;
     }
 }
