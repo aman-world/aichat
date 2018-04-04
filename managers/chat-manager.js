@@ -16,7 +16,8 @@ module.exports = (app, io) => {
             if (!msg || msg.trim().lenght < 1) return;
             apiAi.handleTextRequest(msg, '12345')
                 .then(response => {
-                    if (response && response.result && response.result.fulfillment && response.result.fulfillment.speech) {
+                    if (response && response.result && response.result.fulfillment 
+                        && response.result.fulfillment.speech && response.result.fulfillment.speech !== 'NO_RESPONSE') {
                         io.emit('message', response.result.fulfillment.speech);
                     }
                 });
